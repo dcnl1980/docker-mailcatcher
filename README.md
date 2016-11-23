@@ -1,50 +1,22 @@
-# mailcatcher docker image
-
-Here is an unofficial Dockerfile for [mailcatcher][mailcatcher].
+# mailcatcher docker image (works with docker-compose)
 
 It is a very small image (~34 MB uncompressed) available on [docker hub][dockerhubpage] based on [Alpine Linux][alpinehubpage] and using the last available release from the official Github repo of [MailHog][mailhog].
-
-
-## Changelog
-
-- 2016-10-07 Adding ruby-json
-- 2016-09-08 Upgrade mailcatcher from 0.6.4 to 0.6.5
-- 2016-06-10 Upgrade Alpine Linux from 3.3 to 3.4
-- 2016-04-06 Adding libstdc++
-- 2016-03-30 Replace Debian by Alpine Linux
-- ...
-
 
 ## Usage
 
 Get it:
 
-    docker pull tophfr/mailcatcher
+    git clone https://github.com/dcnl1980/docker-mailcatcher.git
+
+Build it:
+
+    docker-compose build
 
 Run it:
 
-    docker run -d -p 1080:80 --name smtp tophfr/mailcatcher
-
-Link it:
-
-    docker run -d --link smtp -e SMTP_HOST=smtp --name php56 tophfr/php:5.6
+    docker-compose up
     
-Then you can send emails from your app and check out the web interface: http://\<your docker host\>:1080/.
-
-
-If you want to send emails from your host you can map the 25 port:
-
-    docker run -d -p 1080:80 -p 1025:25 --name mail tophfr/mailcatcher
-
-then send yout emails through your docker host on port 1025 (or any port you want)
-
-
-## Build
-
-Just clone this repo and run:
-
-    docker build -t tophfr/mailcatcher .
-
+Then you can send emails from your app to port 1025 and check out the web interface: http://\<your docker host\>:1080/. Or link this container to your webdevelopment container. 
 
   [mailcatcher]: http://mailcatcher.me/ "MailCatcher fake SMTP server with web interface" 
   [dockerhubpage]: https://hub.docker.com/r/tophfr/mailcatcher/ "Mailcatcher docker hub page"
